@@ -28,7 +28,14 @@ public class MainActivity extends AppCompatActivity {
 
         //Load Imae from Server
         Picasso.with(this).load(ulrLogo).into(imageView);
+
     }   // Main Method
+        public void  clickSingIn(View view){
+
+        }//clickSign
+
+
+
 
     public void clikeSignUpMain(View view) {
         startActivity(new Intent(MainActivity.this,SignUpActivity.class));
