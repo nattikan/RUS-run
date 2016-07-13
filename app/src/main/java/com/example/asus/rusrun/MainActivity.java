@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText userEditText, passwordEditText;
     private ImageView imageView;
     private static final String ulrLogo = "http://swiftcodingthai.com/rus/image/logo_rus.png";
-
+    private String userString, passwordString;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,10 +31,21 @@ public class MainActivity extends AppCompatActivity {
 
     }   // Main Method
         public void  clickSingIn(View view){
+            userString        = userEditText.getText().toString().trim();
+            passwordString    = passwordEditText.getText().toString().trim();
+
+            //Check Space
+            if (userString.equals("") || passwordString.equals("")) {
+                //Have Space
+                MyAlert myAlert = new MyAlert();
+                myAlert.myDialog(this,"Have Space","Please Fill All Every Blank");
+
+            }else{
+                //No Space
+
+            }   //if
 
         }//clickSign
-
-
 
 
     public void clikeSignUpMain(View view) {
