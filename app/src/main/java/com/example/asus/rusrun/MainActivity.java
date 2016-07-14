@@ -1,5 +1,6 @@
 package com.example.asus.rusrun;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -38,14 +39,35 @@ public class MainActivity extends AppCompatActivity {
     // Create Inner Class
     private class SynUser extends AsyncTask<Void, Void, String> {
 
+        // Explicit
+        private String myJSONString,myUserString, myPasswordString;
+        private Context context;
+        public SynUser(String myJSONString,
+                       String myUserString,
+                       String myPasswordString,
+                       Context context)
+        {
+            this.myJSONString = myJSONString;
+            this.myUserString = myUserString;
+            this.myPasswordString = myPasswordString;
+            this.context = context;
+
+        }
+
         @Override
         protected String doInBackground(Void... voids) {
+
+
+
             return null;
-        }// diInBack
+        }// doInBack
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        } //onPost
 
     } // SyUser Class
-
-
 
 
         public void  clickSingIn(View view){
@@ -61,10 +83,11 @@ public class MainActivity extends AppCompatActivity {
 
             }else{
                 //No Space
+                SynUser synUser = new SynUser(urlJSON, userString, passwordString, this);
+                synUser.execute();
+
 
             }   //if
-
-
 
         }//clickSign
 
