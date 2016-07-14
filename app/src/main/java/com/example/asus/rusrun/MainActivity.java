@@ -9,11 +9,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.jar.Attributes;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
         // Explicit
         private String myJSONString,myUserString, myPasswordString;
         private Context context;
+        private boolean statusBoolean = true;
+        private String turePassword;
+        private String myNameString, myIdString,myAvataSting;
+
+
         public SynUser(String myJSONString,
                        String myUserString,
                        String myPasswordString,
@@ -80,6 +91,45 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             Log.d("RusV1", "JSON ==>" + s);
+            try {
+
+                JSONArray jsonArray = new JSONArray(s);
+
+                for (int i = 0 ;i<jsonArray.length();i+=1) {
+
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    if (myUserString.equals(jsonObject.getString("User"))) {
+
+                        statusBoolean = false;
+                        turePassword = jsonObject.getString("Password");
+                        myNameString = jsonObject.getString("Name");
+                        myIdString = jsonObject.getString("id");
+                        myAvataSting = jsonObject.getString("Avata");
+
+                    }
+
+                }//For
+                    if (statusBoolean) {
+
+                        MyAlert myAlert = new MyAlert();
+                        myAlert.myDialog(context,"ไม่มี User นี้" ,
+                                "ไม่มี" + myUserString + "ในฐานข้อมูลของเรา");
+
+                    } else if (myPasswordString.equals(turePassword)) {
+                        //Password Ture
+                        Toast.makeText(context,"Welcome" + myNameString, Toast.LENGTH_SHORT).show();
+
+                    } else {
+                    }   //Password False
+                        MyAlert myAlert = new MyAlert();
+                        myAlert.myDialog(context,"Password False",
+                                "Please Try Again Password False");
+
+
+            }catch (Exception e){
+                Log.d("RusV1", "e onPort ==>" + e.toString());
+            }
 
         } //onPost
 
