@@ -1,6 +1,7 @@
 package com.example.asus.rusrun;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,9 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imageView;
     private static final String ulrLogo = "http://swiftcodingthai.com/rus/image/logo_rus.png";
     private String userString, passwordString;
+    private static final String urlJSON = "http://swiftcodingthai.com/rus/get_user_nattikan.php";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +34,22 @@ public class MainActivity extends AppCompatActivity {
         Picasso.with(this).load(ulrLogo).into(imageView);
 
     }   // Main Method
+
+    // Create Inner Class
+    private class SynUser extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            return null;
+        }// diInBack
+
+    } // SyUser Class
+
+
+
+
         public void  clickSingIn(View view){
+
             userString        = userEditText.getText().toString().trim();
             passwordString    = passwordEditText.getText().toString().trim();
 
@@ -44,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
                 //No Space
 
             }   //if
+
+
 
         }//clickSign
 
